@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1443" height="535" viewBox="0 0 1443 535">
+  <rect width="1443" height="535" fill="#f2f2f2"/>
+  <text x="42" y="55" fill="#595959" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="42">... › 语言和区域 › Microsoft 拼音 › 词典和自学习 › 用户自定义短语</text>
+  <text x="38" y="130" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">添加用户定义的短语</text>
+  <rect x="38" y="149" width="133" height="46" rx="5" fill="#fff" stroke="#d0d0d0"/>
+  <text x="84" y="179" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">添加</text>
+  <text x="38" y="260" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">导入、导出或清除用户自定义短语</text>
+  <rect x="38" y="278" width="133" height="46" rx="5" fill="#fff" stroke="#d0d0d0"/>
+  <text x="85" y="309" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">导入</text>
+  <rect x="185" y="278" width="133" height="46" rx="5" fill="#fff" stroke="#d0d0d0"/>
+  <text x="231" y="309" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">导出</text>
+  <rect x="332" y="278" width="133" height="46" rx="5" fill="#fff" stroke="#d0d0d0"/>
+  <text x="378" y="309" fill="#111" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20">清除</text>
+  <ellipse cx="105" cy="305" rx="60" ry="28" fill="none" stroke="#f0182d" stroke-width="3"/>
+  <text x="44" y="408" fill="#555" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22">•  拼音: dyr    位置: 1    短语: 戴圣然</text>
+  <text x="44" y="469" fill="#555" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22">•  拼音: xyg    位置: 1    短语: 熊亿光</text>
+  <ellipse cx="264" cy="426" rx="245" ry="85" fill="none" stroke="#f0182d" stroke-width="3"/>
+</svg>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>微软拼音 DAT 工作台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Microsoft Pinyin DAT</p>
+          <h1>微软拼音 DAT 工作台</h1>
+        </div>
+        <div class="topbar-side">
+          <div class="theme-switcher" aria-label="界面风格">
+            <button type="button" class="theme-option" data-theme-option="desktop">桌面工具</button>
+            <button type="button" class="theme-option" data-theme-option="workbench">数据工作台</button>
+            <button type="button" class="theme-option" data-theme-option="macos">macOS</button>
+            <button type="button" class="theme-option" data-theme-option="gov">政企蓝白</button>
+          </div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>本地运行</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="panel input-panel">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Input</p>
+              <h2>姓名来源</h2>
+            </div>
+            <span class="counter-chip">txt / csv / xlsx</span>
+          </div>
+
+          <label class="label" for="manualNames">手工输入</label>
+          <textarea id="manualNames" rows="10" placeholder="一行一个姓名，例如：&#10;张三&#10;李四&#10;王小明"></textarea>
+
+          <label class="label top-gap" for="inputFile">文件导入</label>
+          <input id="inputFile" type="file" accept=".txt,.csv,.xlsx">
+          <p class="hint">默认读取第一列；存在“姓名 / name / names”表头时优先读取该列。</p>
+        </aside>
+
+        <section class="main-stack">
+          <div class="panel settings-panel">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker">Configuration</p>
+                <h2>生成设置</h2>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div>
+                <label class="label" for="generationMode">生成模式</label>
+                <select id="generationMode">
+                  <option value="custom_phrase">用户自定义短语 DAT（首字母，win10mspy）</option>
+                  <option value="self_study">自学习词汇 DAT（全拼，win10mspyss）</option>
+                </select>
+                <p id="modeHint" class="hint">用于“用户自定义短语 -> 导入”，编码默认是姓名拼音首字母，可手工修改。</p>
+              </div>
+
+              <div>
+                <label class="label" for="converterPath">ImeWlConverter 路径</label>
+                <input
+                  id="converterPath"
+                  type="text"
+                  value="{{ default_converter_path }}"
+                  placeholder="例如：C:\Tools\imewlconverter.exe 或 ImeWlConverterCmd.dll"
+                >
+                <p class="hint">可填写可执行文件、DLL 路径，或已加入 PATH 的命令名。</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="panel preview-panel">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker">Preview</p>
+                <h2>结果预览</h2>
+                <p id="summaryText" class="hint">还没有解析结果</p>
+              </div>
+              <div class="actions">
+                <button id="parseButton" class="primary">解析并预览</button>
+                <button id="generateButton" class="secondary" disabled>生成 DAT</button>
+                <a id="downloadButton" class="download hidden" href="/download/dat">下载</a>
+              </div>
+            </div>
+
+            <section id="messageBox" class="message hidden"></section>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>中文姓名</th>
+                    <th id="codeColumnTitle">拼音首字母</th>
+                  </tr>
+                </thead>
+                <tbody id="resultBody">
+                  <tr class="empty-row">
+                    <td colspan="2">解析后可在这里检查并修改编码</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section class="panel inspector">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Inspector</p>
+            <h2>查看已导出的 DAT 文件</h2>
+            <p class="hint">上传 DAT 后自动识别用户自定义短语或自学习词汇格式。</p>
+          </div>
+          <button id="inspectButton" class="secondary">查看 DAT</button>
+        </div>
+
+        <div class="inspect-grid">
+          <div>
+            <label class="label" for="datFile">DAT 文件</label>
+            <input id="datFile" type="file" accept=".dat">
+            <p class="hint">自动识别失败时，会使用上方生成模式作为兜底解析类型。</p>
+          </div>
+          <div class="detected-card">
+            <span class="detected-label">识别结果</span>
+            <strong id="detectedDatType">未上传</strong>
+            <p id="detectedDatHint" class="hint">可查看两种类型：用户自定义短语 DAT、自学习词汇 DAT。</p>
+          </div>
+        </div>
+
+        <section id="inspectMessageBox" class="message hidden"></section>
+
+        <div class="table-wrap inspect-table">
+          <table>
+            <thead>
+              <tr>
+                <th>中文姓名 / 短语</th>
+                <th id="inspectCodeColumnTitle">编码</th>
+              </tr>
+            </thead>
+            <tbody id="inspectBody">
+              <tr class="empty-row">
+                <td colspan="2">上传 DAT 后在这里查看内容</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
